@@ -13,6 +13,12 @@ public interface AlunoRepository extends JpaRepository<Aluno, Long>{
 	// buscar query select aluno por nome
 	
 	List<Aluno> findByNome(String nome);
+	
+	
+	//  metodo para buscar no banco de dados os emails dos alunos
+	Aluno findByEmail(String email);
+		
+	
 
 	
 

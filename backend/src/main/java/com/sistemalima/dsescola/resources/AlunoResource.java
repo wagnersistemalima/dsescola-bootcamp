@@ -25,6 +25,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.sistemalima.dsescola.dto.AlunoDTO;
 import com.sistemalima.dsescola.dto.AlunoDTODetalhes;
+import com.sistemalima.dsescola.dto.UserInsertDTO;
+import com.sistemalima.dsescola.dto.UserUpdateDTO;
 import com.sistemalima.dsescola.services.AlunoService;
 
 @RestController
@@ -75,11 +77,11 @@ public class AlunoResource {
 	
 	@PostMapping
 	@CacheEvict(value = "listaDeAlunos", allEntries = true)
-	public ResponseEntity<AlunoDTO> insert(@RequestBody @Valid AlunoDTO dto) {
-		dto = service.insert(dto);
+	public ResponseEntity<AlunoDTO> insert(@RequestBody @Valid UserInsertDTO dto) {
+		AlunoDTO newDto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(dto.getId()).toUri();
-		return ResponseEntity.created(uri).body(dto);
+		return ResponseEntity.created(uri).body(newDto);
 	}
 
 	
@@ -87,9 +89,9 @@ public class AlunoResource {
 	
 	@PutMapping(value = "/{id}")
 	@CacheEvict(value = "listaDeAlunos", allEntries = true)
-	public ResponseEntity<AlunoDTO> update(@PathVariable Long id, @Valid @RequestBody AlunoDTO dto) {
-		dto = service.update(id, dto);
-		return ResponseEntity.ok().body(dto);
+	public ResponseEntity<AlunoDTO> update(@PathVariable Long id, @Valid @RequestBody UserUpdateDTO dto) {
+		AlunoDTO newDto = service.update(id, dto);
+		return ResponseEntity.ok().body(newDto);
 	}
 	
 	// 6 end point deletar um aluno
