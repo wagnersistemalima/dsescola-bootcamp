@@ -31,3 +31,10 @@ INSERT INTO tb_resposta (id_aluno, id_avaliacao) VALUES (4, 3);
 
 
 INSERT INTO user (nome, email, senha) VALUES ('Aluno', 'aluno@email.com', '$2a$10$bjSu8X6V1enJ8rQj2TIc/OlV8Q1GWm8Sbqo2.IbpltO9nJVdiENLK');
+INSERT INTO user (nome, email, senha) VALUES ('Moderador', 'moderador@email.com', '$2a$10$bjSu8X6V1enJ8rQj2TIc/OlV8Q1GWm8Sbqo2.IbpltO9nJVdiENLK');
+
+INSERT INTO Perfil (nome) VALUES ('ROLE_ALUNO');
+INSERT INTO Perfil (nome) VALUES ('ROLE_MODERADOR');
+
+INSERT INTO User_Perfis (User_id, perfis_id) VALUES (1, 1);
+INSERT INTO User_Perfis (User_id, perfis_id) VALUES (2, 2);

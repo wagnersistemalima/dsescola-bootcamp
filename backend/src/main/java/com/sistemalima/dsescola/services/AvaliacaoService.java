@@ -29,6 +29,27 @@ public class AvaliacaoService {
 		
 	}
 	
+	// metodo para buscar titulo pelo nome
+	@Transactional(readOnly = true)
+	public List<AvaliacaoDTO> findByTitulo(String titulo) {
+		List<Avaliacao> list = repository.findByTitulo(titulo);
+		return list.stream().map(x -> new AvaliacaoDTO(x)).collect(Collectors.toList());
+	}
+	
+	// metodo para inserir uma avaliacao
+	
+	@Transactional
+	public AvaliacaoDTO insert(AvaliacaoDTO dto) {
+		Avaliacao entity = new Avaliacao();
+		entity.setTitulo(dto.getTitulo());
+		entity.setDescricao(dto.getDescricao());
+		entity.setFormulario(dto.getFormulario());
+		entity = repository.save(entity);
+		return new AvaliacaoDTO(entity);
+	}
+	
+	// metodo atualizar
+	
 	
 
 }

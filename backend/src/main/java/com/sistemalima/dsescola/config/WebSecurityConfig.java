@@ -62,8 +62,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers(HttpMethod.GET, "/alunos/*").permitAll()
 		.antMatchers(HttpMethod.GET, "/formularios").permitAll()
 		.antMatchers(HttpMethod.GET, "/avaliacoes").permitAll()
-		.antMatchers(HttpMethod.POST, "/auth").permitAll()
+		.antMatchers(HttpMethod.GET, "/avaliacoes/*").permitAll()
+		.antMatchers(HttpMethod.POST, "/auth").permitAll()              // para se autenticar
 		.antMatchers(HttpMethod.GET, "/actuator/**").permitAll()    // em produção retirar esta linha
+		.antMatchers(HttpMethod.DELETE, "/alunos/*").hasRole("MODERADOR")   // perfil moderador pode deletar aluno
 		.anyRequest().authenticated()
 		.and().csrf().disable()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

@@ -27,5 +27,13 @@ public class AvaliacaoResource {
 		List<AvaliacaoDTO> list = service.findAll();	
 		return ResponseEntity.ok().body(list);
 	}
+	
+	// 2º end point / buscar uma avaliacao pelo titulo
+	
+	@GetMapping(value = "/titulo")
+	public ResponseEntity<List<AvaliacaoDTO>> findByTitulo(String titulo) {
+		List<AvaliacaoDTO> list = service.findByTitulo(titulo);
+		return ResponseEntity.ok().body(list);
+	}
 
 }

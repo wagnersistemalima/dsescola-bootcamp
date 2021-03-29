@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
@@ -48,11 +49,12 @@ public class AlunoDTO implements Serializable{
 	
 	// construtor personalizado
 	
-	public AlunoDTO(Long id, String nome, String email, Integer idade) {
+	public AlunoDTO(Long id, String nome, String email, Integer idade, List<AvaliacaoDTO> avaliacoes) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.idade = idade;
+		this.avaliacoes = avaliacoes;
 	}
 
 	// construtor personalizado recebendo uma entidade
@@ -62,7 +64,7 @@ public class AlunoDTO implements Serializable{
 		this.nome = entity.getNome();
 		this.email = entity.getEmail();
 		this.idade = entity.getIdade();
-		
+		this.avaliacoes = entity.getAvaliacoes().stream().map(x -> new AvaliacaoDTO(x)).collect(Collectors.toList());
 	}
 
 	// construtor personalizado

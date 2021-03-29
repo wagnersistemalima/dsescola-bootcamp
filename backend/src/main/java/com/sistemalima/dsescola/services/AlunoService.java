@@ -1,6 +1,5 @@
 package com.sistemalima.dsescola.services;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -36,6 +35,7 @@ public class AlunoService {
 	@Transactional(readOnly = true)
 	public Page<AlunoDTO> findAllPaged(PageRequest pageRequest) {
 		Page<Aluno> list = repository.findAll(pageRequest);
+		repository.findAlunosAvaliacoes(list.stream().collect(Collectors.toList()));
 		return list.map(x -> new AlunoDTO(x));
 	}
 	
@@ -52,9 +52,10 @@ public class AlunoService {
 	// metodo para buscar aluno pelo nome
 	
 	@Transactional
-	public List<AlunoDTODetalhes> findByNome(String nome) {
-		List<Aluno> list = repository.findByNome(nome);
-		return list.stream().map(x -> new AlunoDTODetalhes(x)).collect(Collectors.toList());
+	public AlunoDTODetalhes findByNome(String nome) {
+		Optional<Aluno> obj  = repository.findByNome(nome);
+		Aluno entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
+		return new AlunoDTODetalhes(entity, entity.getAvaliacoes());
 	}
 	
 	// metodo para inserir aluno

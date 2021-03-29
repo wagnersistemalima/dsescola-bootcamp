@@ -1,7 +1,6 @@
 package com.sistemalima.dsescola.resources;
 
 import java.net.URI;
-import java.util.List;
 
 import javax.validation.Valid;
 
@@ -68,9 +67,9 @@ public class AlunoResource {
 	// 3 end point / buscar por nome
 	
 	@GetMapping(value = "/nome")
-	public ResponseEntity<List<AlunoDTODetalhes>> findByNome(String nome) {
-		List<AlunoDTODetalhes> list = service.findByNome(nome);
-		return ResponseEntity.ok().body(list);
+	public ResponseEntity<AlunoDTODetalhes>  findByNome(String nome) {
+		AlunoDTODetalhes dto = service.findByNome(nome);
+		return ResponseEntity.ok().body(dto);
 	}
 	
 	// 4º end point inserir aluno
