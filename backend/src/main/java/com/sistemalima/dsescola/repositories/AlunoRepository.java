@@ -12,9 +12,9 @@ import com.sistemalima.dsescola.entities.Aluno;
 @Repository
 public interface AlunoRepository extends JpaRepository<Aluno, Long>{
 	
-	// metodo para resolver problema da n+1 consultas
 	
-	
+	// metodo para resolver problema da n+1 consultas com consulta jpql
+		
 	@Query("SELECT obj FROM Aluno obj JOIN FETCH obj.avaliacoes WHERE obj IN :alunos")
 	List<Aluno> findAlunosAvaliacoes(List<Aluno> alunos);
 	
@@ -24,6 +24,7 @@ public interface AlunoRepository extends JpaRepository<Aluno, Long>{
 	
 	
 	//  metodo para buscar no banco de dados os emails dos alunos
+	
 	Aluno findByEmail(String email);
 		
 	
